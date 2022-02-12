@@ -13,10 +13,10 @@ totalMoney()
 function renderSPCart () {
     let content = ''
     
-    carts.map(cart => {
+    carts.map((cart,index) => {
         content += `
         <div class="box" id="box-${cart.product.name}">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times" onclick="deletePhone('${cart.product.name}')"></i>
         <img src="${cart.product.img}" alt="">
         <div class="content">
             <h3>${cart.product.name}</h3>
@@ -67,6 +67,28 @@ function caculatorDeincrease(namePhone) {
     totalMoney()
 }
 window.caculatorDeincrease = caculatorDeincrease
+// delete san pham
+
+function deletePhone(namePhone) {
+ let position = lookPosition(namePhone)
+  if(position != -1) {
+    carts.splice(position,1)
+  }
+  setPhoneLocal()
+
+  renderSPCart()
+  totalMoney()
+}
+window.deletePhone = deletePhone
+function lookPosition(namePhone) {
+  let position = -1;
+  carts.map((cart,index) => {
+    if(cart.product.name === namePhone) {
+      position = index
+    }
+  })
+  return position
+}
 // tính tổng tiền 
 function totalMoney() {
     let totalMoney 
@@ -132,3 +154,4 @@ document.getElementById("btnPaymentDelete").onclick = function () {
       })
 
 }
+

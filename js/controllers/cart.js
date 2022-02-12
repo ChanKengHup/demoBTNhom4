@@ -81,27 +81,13 @@ function totalMoney() {
 
 // notification when payment
 document.getElementById("btnPayment").onclick = function () {
-    Swal.fire({
-        title: 'Đang thanh toán',
-        html: 'Thanh toán sau <b></b> giây',
-        timer: 1000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading()
-          const b = Swal.getHtmlContainer().querySelector('b')
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-          }, 100)
-        },
-        willClose: () => {
-          clearInterval(timerInterval)
-        }
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
-        }
-      })
+  Swal.fire({
+    position: 'top-center',
+    icon: 'success',
+    title: 'Bạn đã thanh toán thành công',
+    showConfirmButton: false,
+    timer: 1500
+  })
 }
 
 document.getElementById("btnPaymentDelete").onclick = function () {
